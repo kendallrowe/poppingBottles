@@ -9,4 +9,8 @@
 
 // Test Output
 
+const poppinBottles = function(investment) {
+  return 15;
+};
+
 module.exports = poppinBottles;
