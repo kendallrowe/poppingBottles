@@ -1,9 +1,19 @@
-const freeBottles = function(startingBottles) {
+const freeBottles = function(emptyBottles, caps) {
   // For every two empty bottles, you can get one free (full) bottle of pop
-  let earnedBottles = Math.floor(startingBottles / 2);
+  let earnedBottles = Math.floor(emptyBottles / 2);
+  emptyBottles -= earnedBottles * 2;
   // For every four bottle caps, you can get one free (full) bottle of pop
-  earnedBottles += Math.floor(startingBottles / 4);
-  return earnedBottles + freeBottles(earnedBottles);
+  earnedBottles += Math.floor(caps / 4);
+  caps -= Math.floor(caps / 4) * 4;
+  
+  emptyBottles += earnedBottles;
+  caps += earnedBottles;
+
+  if (earnedBottles === 0) {
+    return 0;
+  } else {
+    return earnedBottles + freeBottles(emptyBottles, caps);
+  }
 };
 
 const poppinBottles = function(investment) {
@@ -11,11 +21,7 @@ const poppinBottles = function(investment) {
   // const changeRemaining = investment % 2;
   const bottlesBought = Math.floor(investment / 2);
 
-  // Figure out the algorithm that will calculate this. 
-  // For example, given a $20 investment, the customer will get 10 bottles of pop. 
-  // That gives a supply of both bottles and bottle caps that can be used to redeem for further bottles, 
-  // which will then produce a further supply for recycling.
-  return freeBottles(bottlesBought);
+  return bottlesBought + freeBottles(bottlesBought, bottlesBought);
 };
 
 module.exports = poppinBottles;
