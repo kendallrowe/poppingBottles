@@ -1,3 +1,6 @@
+const investment = process.argv;
+
+
 const freeBottles = function(emptyBottles, caps) {
   // For every two empty bottles, you can get one free (full) bottle of pop
   let earnedBottles = Math.floor(emptyBottles / 2);
@@ -23,5 +26,7 @@ const poppinBottles = function(investment) {
 
   return bottlesBought + freeBottles(bottlesBought, bottlesBought);
 };
+
+console.log(poppinBottles(parseInt(investment.slice(2), 10)));
 
 module.exports = poppinBottles;
